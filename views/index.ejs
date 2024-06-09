@@ -112,8 +112,11 @@
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    alert('작품이 확인되었습니다! 도슨트의 안내가 시작됩니다!');
-                    window.location.href = window.location.protocol + "//" + window.location.hostname + ":" + newPort + "/?art_id=" + currentArtId;
+                alert('작품이 확인되었습니다! 도슨트의 안내가 시작됩니다!');
+                const newUrl = new URL(window.location.href);
+                newUrl.port = newPort;
+                newUrl.searchParams.set('art_id', currentArtId);
+                window.location.href = newUrl.toString();
                 } else {
                     alert('작품 확인에 실패했습니다.');
                 }
